@@ -17,7 +17,8 @@
         "boot/server/server.lua"
     ],
     "client_scripts": [
-        "boot/server/weapons.lua",
+        "boot/client/weapons.lua",
+        "spawn/client/spawn.lua",
 		"scoreboard/client/scoreboard.lua"
     ],
     "files": [

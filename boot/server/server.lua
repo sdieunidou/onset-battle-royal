@@ -25,10 +25,5 @@ BR.BattleManager = battleManager
 
 AddEvent( "OnPackageStart" , function()
     pprint.info( "Loading BattleRoyal\n" )
-
-    CreateObject(2, 206432.25, 193076.046875, 1196.6668701172)
-    CreateObject(14, 206432.25, 193058.84375, 1301.1348876953)
-    CreateText3D("AK-47", 17, 206432.25, 193076.046875, 1196.6668701172 + 60, 0,0,0)
-
     BR.BattleManager.init()
 end)

@@ -129,6 +129,8 @@ function battleManager.spawnPlayer (player)
     SetPlayerWeapon(player, 12, 90, true, 1, true)
     SetPlayerWeapon(player, 7, 30, true, 2, true)
     
+    spawnManager.randomPlayerClothes(player, player)
+    
     Delay(1000, function()
         AttachPlayerParachute(player, true)
     end)
