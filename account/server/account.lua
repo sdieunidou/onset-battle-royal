@@ -2,7 +2,7 @@
 local pprint = require( ( 'packages/%s/utils/server/pprint' ):format( GetPackageName() ) )
 
 function OnPlayerSteamAuth(player)
-	pprint.info("OnPlayerServerAuth("..player..") has SteamId "..GetPlayerSteamId(player))
+	pprint.info(GetPlayerName(player).." has SteamId "..GetPlayerSteamId(player))
 
 	CreatePlayerData(player)
 
