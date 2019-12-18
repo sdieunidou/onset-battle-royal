@@ -50,7 +50,7 @@ function GetPlayerColorHEX(player)
 end
 
 function OnPlayerChat(player, message)
-	if (GetPlayerPropertyValue(player, 'mute') ~= 0) then
+	if (tonumber(GetPlayerPropertyValue(player, 'mute')) ~= 0) then
 		if (not CheckForUnmute(player)) then
 			return AddPlayerChat(player, "You have been muted")
 		end
@@ -75,7 +75,7 @@ end
 AddEvent("OnPlayerChat", OnPlayerChat)
 
 function CheckForUnmute(player)
-	if (GetTimeSeconds() > GetPlayerPropertyValue(player, 'mute')) then
+	if (GetTimeSeconds() > tonumber(GetPlayerPropertyValue(player, 'mute'))) then
 		SetPlayerPropertyValue(player, "mute", 0, false)
 		return true
 	end
