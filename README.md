@@ -1,6 +1,6 @@
 # Battle Royal Game Mode for Onset Server
 
-Simple battle royal game mode for Onset.
+Simple battle royal game mode for Onset. Currently in development. Feel free to contribute!
 
 ## Configuration
 
