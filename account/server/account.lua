@@ -16,10 +16,15 @@ AddEvent( "OnPlayerQuit" , function( player )
 end)
 
 function CreatePlayerData( player )
-	--Account stuff
-    SetPlayerPropertyValue(player, "locale", GetPlayerLocale(player), true)
-    SetPlayerPropertyValue(player, "admin", 5, true)
+	local adminLevel = 0
+	if (GetPlayerSteamId(player) == BR.Config.ADMIN_STEAMID) then
+		adminLevel = 5
+	end
 
+	--Account stuff
+	SetPlayerPropertyValue(player, "locale", GetPlayerLocale(player), true)
+    SetPlayerPropertyValue(player, "admin", adminLevel, true)
+	
 	--Gameplay stuff
     SetPlayerPropertyValue(player, "mute", 0, true)
     SetPlayerPropertyValue(player, "chat_cooldown", 0, true)

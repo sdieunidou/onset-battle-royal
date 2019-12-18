@@ -126,7 +126,7 @@ function battleManager.spawnPlayer (player)
     
     local randomX = RandomFloat(cx + BR.Config.ZONE_REDUCE_RADIUS, cx - BR.Config.ZONE_REDUCE_RADIUS)
     local randomY = RandomFloat(cy + BR.Config.ZONE_REDUCE_RADIUS, cy - BR.Config.ZONE_REDUCE_RADIUS)
-    SetPlayerLocation(player, randomX, randomY, 10000.000000)
+    SetPlayerLocation(player, randomX, randomY, 30000.000000)
     SetPlayerDimension(player, BR.Config.DIMENSION_BATTLE)
 
     SetPlayerHealth(player, 100)

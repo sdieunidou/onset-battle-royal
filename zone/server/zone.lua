@@ -34,8 +34,8 @@ function zoneManager.init()
         BR.BattleManager.doForAllPlayersInBattle( function( player )
             local x, y, z = GetPlayerLocation( player )
     
-            if (not zoneManager.center.containts(x, y)) then
-                zoneManager.playerZoneDamage()
+            if (not zoneManager.center:contains(x, y)) then
+                zoneManager.playerZoneDamage( player )
             end
         end)
     end, 1000 )
@@ -45,7 +45,6 @@ end
 function zoneManager.next()
     zoneManager.currentRound = zoneManager.currentRound + 1
 
-    zoneManager.center = nil
     zoneManager.center = HC.circle(RandomFloat(183818, -217367), RandomFloat(183818, -217367), zoneManager.currentRadius)
     
     pprint.info( 'New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in. The next zone will be in '..BR.Config.TIME_BY_ZONE..' seconds! (current zone radius: '..zoneManager.currentRadius..' meters)' )
@@ -78,7 +77,7 @@ function zoneManager.next()
 end
 
 function zoneManager.playerZoneDamage (player) 
-    pprint.info( GetPlayerName(player)..' not in zone!' )
+    pprint.info( GetPlayerName( player )..' not in zone!' )
     AddPlayerChat( player, 'You are not in the zone!' )
 
     local playerArmor = GetPlayerArmor(player) - BR.Config.DAMAGE_PER_SECOND

@@ -6,8 +6,6 @@ local spawnManager = {}
 function spawnManager.setPlayerDimensionSpawn( player )
     SetPlayerDimension(player, BR.Config.DIMENSION_SPAWN)
     SetPlayerVoiceDimension(player, BR.Config.DIMENSION_SPAWN)
-    
-    pprint.info(GetPlayerName(player).." setPlayerDimensionSpawn" )
 end
 
 function spawnManager.OnPlayerJoin( player )
