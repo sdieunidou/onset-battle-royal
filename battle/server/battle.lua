@@ -122,7 +122,7 @@ function battleManager.spawnPlayer (player)
     SetPlayerHealth(player, 100)
     SetPlayerArmor(player, 100)
 
-    SetPlayerWeapon(player, 13, 90, true, 1, true)
+    SetPlayerWeapon(player, 12, 90, true, 1, true)
     SetPlayerWeapon(player, 7, 30, true, 2, true)
     
     Delay(1000, function()

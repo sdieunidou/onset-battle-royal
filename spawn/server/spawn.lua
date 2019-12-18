@@ -14,7 +14,7 @@ function spawnManager.OnPlayerJoin( player )
     
 	AddPlayerChat(player, '<span style="bold" size="14">============================</>')
 	AddPlayerChat(player, '<span style="bold" size="14">Welcome to BattleRoyal (in development).</>')
-	AddPlayerChat(player, 'You need to be at least 2 players to start a new battle royal.')
+	AddPlayerChat(player, 'You need to be at least '..BR.Config.MIN_PLAYERS..' players to start a new battle royal.')
 	AddPlayerChat(player, '<span color="#f4f142ff" style="bold" size="14">Wait for the next game</>.')
     AddPlayerChat(player, '<span style="bold" size="14">============================</>')
 

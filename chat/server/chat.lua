@@ -12,6 +12,8 @@ You should have received a copy of the Onset Open Source License along with this
 see https://bluemountains.io/Onset_OpenSourceSoftware_License.txt
 ]]--
 
+local pprint = require( ( 'packages/%s/utils/server/pprint' ):format( GetPackageName() ) )
+
 local NiceColors = { 0xFF0000, 0xFF0066, 0xEF00FF, 0x8000FF, 0x1100FF, 0x004DFF, 0x00B3FF, 0x00FFD5, 0x00FF77, 0x00FF1A, 0x55FF00, 0xEFFF00, 0xFFBC00, 0xFFA200, 0x915425 }
 
 local rgb2hex = function (rgb)
@@ -50,6 +52,8 @@ function GetPlayerColorHEX(player)
 end
 
 function OnPlayerChat(player, message)
+	pprint.info(player)
+	pprint.info(message)
 	if (tonumber(GetPlayerPropertyValue(player, 'mute')) ~= 0) then
 		if (not CheckForUnmute(player)) then
 			return AddPlayerChat(player, "You have been muted")
@@ -69,7 +73,9 @@ function OnPlayerChat(player, message)
 
 	message = message:gsub("<span.->(.-)</>", "%1") -- removes chat span tag
 
-	local fullchatmessage = '<span color="'..GetPlayerColorHEX(player)..'">'..GetPlayerName(player)..'('..GetPlayerLocale(player)..'):</> '..message
+	local fullchatmessage = '<span color="'..GetPlayerColorHEX(player)..'">'..GetPlayerName(player)..' ('..GetPlayerLocale(player)..'):</> '..message
+
+	pprint.info(fullchatmessage)
 	AddPlayerChatAll(fullchatmessage)
 end
 AddEvent("OnPlayerChat", OnPlayerChat)

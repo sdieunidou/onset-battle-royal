@@ -12,11 +12,13 @@
         "spawn/server/spawn.lua",
         "zone/server/zone.lua",
         "battle/server/battle.lua",
-        "boot/server/server.lua",
-		    "scoreboard/scoreboard_s.lua"
+		"scoreboard/server/scoreboard.lua",
+        "boot/server/weapons.lua",
+        "boot/server/doors.lua",
+        "boot/server/server.lua"
     ],
     "client_scripts": [
-		    "scoreboard/scoreboard_c.lua"
+		"scoreboard/client/scoreboard.lua"
     ],
     "files": [
         "scoreboard/gui/scoreboard.html",
