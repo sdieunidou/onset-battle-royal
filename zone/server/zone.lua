@@ -1,6 +1,6 @@
 local package_name = GetPackageName()
 local pprint = require( ( 'packages/%s/utils/server/pprint' ):format( GetPackageName() ) )
-local HC = require 'packages/battleroyal/HC'
+local HC = require( ( 'packages/%s/vendor/HC' ):format( GetPackageName() ) )
 
 local zoneManager = { }
 zoneManager.currentRound = 1
