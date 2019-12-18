@@ -5,7 +5,6 @@ local HC = require( ( 'packages/%s/vendor/HC' ):format( GetPackageName() ) )
 local zoneManager = { }
 zoneManager.currentRound = 1
 zoneManager.currentRadius = nil
-zoneManager.hasZoneDamage = false
 zoneManager.timer = nil
 zoneManager.timerDamage = nil
 zoneManager.reduceRadius = nil
@@ -21,7 +20,7 @@ function zoneManager.init()
         zoneManager.currentRadius = newRadius
         
         if (zoneManager.currentRound == BR.Config.ROUNDS + 1) then
-            zoneManager.stop()
+            zoneManager.lastRound()
         else
             zoneManager.next()
         end
@@ -45,10 +44,11 @@ end
 function zoneManager.next()
     zoneManager.currentRound = zoneManager.currentRound + 1
 
+    zoneManager.center = nil
     zoneManager.center = HC.circle(RandomFloat(183818, -217367), RandomFloat(183818, -217367), zoneManager.currentRadius)
     
     pprint.info( 'New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in. The next zone will be in '..BR.Config.TIME_BY_ZONE..' seconds! (current zone radius: '..zoneManager.currentRadius..' meters)' )
-    AddPlayerChatAll( 'New zone is here! You have <span color="#ff0000ee">'..(BR.Config.TIME_BY_ZONE / 2)..' seconds</> to go in. The next zone will be <span color="#ff0000ee">'..BR.Config.TIME_BY_ZONE..' seconds</>!' )
+    AddPlayerChatAll( '<span color="#ee0000ee" style="bold" size="16">New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in!</>' )
 
     BR.BattleManager.doForAllPlayersInBattle( function( player )
         local x, y, z = GetPlayerLocation( player )
@@ -65,12 +65,12 @@ function zoneManager.next()
         end)
     end)
 
-    Delay(BR.Config.TIME_BY_ZONE / 2, function()
+    Delay((BR.Config.TIME_BY_ZONE / 2) * 1000, function()
         pprint.info( 'Start zone damage for '..(BR.Config.TIME_BY_ZONE / 2)..' secondes' )
         UnpauseTimer( zoneManager.timerDamage )
     end)
 
-    Delay(BR.Config.TIME_BY_ZONE, function()
+    Delay(BR.Config.TIME_BY_ZONE * 1000, function()
         pprint.info( 'End zone damage' )
         PauseTimer( zoneManager.timerDamage )
     end)
@@ -83,7 +83,7 @@ function zoneManager.playerZoneDamage (player)
     local playerArmor = GetPlayerArmor(player) - BR.Config.DAMAGE_PER_SECOND
     local playerHealth = GetPlayerHealth(player) + playerArmor
 
-    if (playerArmor < 0) then
+    if (playerArmor <= 0) then
         playerHealth = playerHealth + playerArmor
         playerArmor = 0
     end
@@ -107,12 +107,17 @@ function zoneManager.start()
     PauseTimer(zoneManager.timerDamage)
 end
 
-function zoneManager.stop()
+function zoneManager.lastRound()
     PauseTimer(zoneManager.timer)
-    PauseTimer(zoneManager.timerDamage)
 
     pprint.info( 'Final zone!!! (radius: '..zoneManager.currentRadius..' meters)' )
-    AddPlayerChatAll( 'Final zone!!!' )
+    AddPlayerChatAll('<span color="#ee0000ee" style="bold" size="16">Final zone!!!</>')
+
+
+    Delay((BR.Config.TIME_BY_ZONE / 2) * 1000, function()
+        pprint.info( 'Start zone damage for '..(BR.Config.TIME_BY_ZONE / 2)..' secondes' )
+        UnpauseTimer( zoneManager.timerDamage )
+    end)
 end
 
 function zoneManager.getCenter()

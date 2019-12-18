@@ -73,7 +73,7 @@ end
 
 function battleManager.start()
     pprint.info( ( 
-            'Starting New BatteRoyal in 10 seconds! Rules: %d minutes - %d zones - %ds by zones - %d max players - %d zone radius - %d zone reduce radius'
+            'Starting new BatteRoyal in 10 seconds! Rules: %d minutes - %d zones - %ds by zones - %d max players - %d zone radius - %d zone reduce radius'
         ):format(
           BR.Config.MAX_TIME / 60,
           BR.Config.ROUNDS,
@@ -83,18 +83,7 @@ function battleManager.start()
           BR.Config.ZONE_REDUCE_RADIUS
         ) 
     )
-
-    AddPlayerChatAll( 'Starting New BatteRoyal in 10 seconds!' )
-    AddPlayerChatAll( ( 
-            'Rules: <span color="#ff0000ee">%d minutes - %d zones - %ds by zones</>'
-        ):format(
-          BR.Config.MAX_TIME / 60,
-          BR.Config.ROUNDS,
-          BR.Config.TIME_BY_ZONE
-        ) 
-        
-    )
-
+    AddPlayerChatAll( '<span color="#3c763d" style="bold" size="16">Starting new BatteRoyal in 10 seconds!</>' )
     PauseTimer(battleManager.timer)
     
     battleManager.state = STATE_ACTIVE
@@ -144,7 +133,7 @@ end
 function battleManager.SetGameEnd( player )
     battleManager.stop()
 
-    AddPlayerChatAll( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
+    AddPlayerChatAll('<span color="#2db92f" style="bold" size="16">'..GetPlayerName(player)..' has win the battle with '..battleManager.players[player].kills..' kills</>')
     pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
 end
 
@@ -161,8 +150,8 @@ function battleManager.playerKilled ( player, instigator )
             battleManager.players[player].position = playerPosition
 
             if (instigator ~= nil) then
-                AddPlayerChat(player, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
-                AddPlayerChat(instigator, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
+                AddPlayerChat(player, '<span color="#ee0000ee" style="bold" size="16">'..GetPlayerName(instigator).." has killed "..GetPlayerName(player)..'</>')
+                AddPlayerChat(instigator, '<span color="#ee0000ee" style="bold" size="16">'..GetPlayerName(instigator).." has killed "..GetPlayerName(player)..'</>')
             end
         end
 
