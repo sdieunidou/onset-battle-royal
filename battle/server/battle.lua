@@ -46,8 +46,8 @@ function battleManager.OnPlayerDeath( player, instigator )
     battleManager.playerKilled ( player, instigator )
 end
 
-function battleManager.OnPlayerQuit( player, instigator )
-    battleManager.playerKilled ( player, instigator )
+function battleManager.OnPlayerQuit( player )
+    battleManager.playerKilled ( player )
 end
 
 function battleManager.stop()
@@ -160,11 +160,11 @@ function battleManager.playerKilled ( player, instigator )
             battleManager.players[player].kills = battleManager.players[player].kills + 1
             battleManager.players[player].position = playerPosition
 
-            AddPlayerChat(player, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
-            AddPlayerChat(instigator, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
+            if (instigator ~= nil) then
+                AddPlayerChat(player, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
+                AddPlayerChat(instigator, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
+            end
         end
-
-        pprint.info(playerPosition)
 
         AddPlayerChatAll( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
         pprint.info( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
@@ -173,7 +173,7 @@ function battleManager.playerKilled ( player, instigator )
             battleManager.SetGameEnd( instigator )
         end
 
-        battleManager.players[player] = nil
+        -- battleManager.players[player] = nil
 	end
 end
 
