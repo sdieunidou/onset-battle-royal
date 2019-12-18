@@ -44,8 +44,10 @@ end
 function zoneManager.next()
     zoneManager.currentRound = zoneManager.currentRound + 1
 
+    local cx, cy = zoneManager.center:center()
     zoneManager.center = nil
-    zoneManager.center = HC.circle(RandomFloat(183818, -217367), RandomFloat(183818, -217367), zoneManager.currentRadius)
+
+    zoneManager.center = HC.circle(cx, cy, zoneManager.currentRadius)
     
     pprint.info( 'New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in. The next zone will be in '..BR.Config.TIME_BY_ZONE..' seconds! (current zone radius: '..zoneManager.currentRadius..' meters)' )
     AddPlayerChatAll( '<span color="#ee0000ee" style="bold" size="16">New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in!</>' )
