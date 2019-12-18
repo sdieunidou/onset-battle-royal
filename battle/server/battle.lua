@@ -133,6 +133,8 @@ end
 function battleManager.SetGameEnd( player )
     battleManager.stop()
 
+    if (player == nil) then return end
+
     AddPlayerChatAll('<span color="#2db92f" style="bold" size="16">'..GetPlayerName(player)..' has win the battle with '..battleManager.players[player].kills..' kills</>')
     pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
 end
