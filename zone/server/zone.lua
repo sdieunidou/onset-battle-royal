@@ -81,7 +81,7 @@ function zoneManager.playerZoneDamage (player)
     AddPlayerChat( player, 'You are not in the zone!' )
 
     local playerArmor = GetPlayerArmor(player) - BR.Config.DAMAGE_PER_SECOND
-    local playerHealth = GetPlayerHealth(player) + playerArmor
+    local playerHealth = GetPlayerHealth(player)
 
     if (playerArmor <= 0) then
         playerHealth = playerHealth + playerArmor
