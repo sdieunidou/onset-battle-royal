@@ -33,8 +33,6 @@ Configuration is done in `boot/server/server.lua`.
 
 ## TODO
 
-* Add zone effects
-* Add dommages
 * Compass (center point)
 * Client GUI
 

@@ -33,7 +33,7 @@ function zoneManager.init()
             local x, y, z = GetPlayerLocation( player )
     
             if (not zoneManager.center.containts(x, y)) then
-                zoneManager.playerZoneDommage()
+                zoneManager.playerZoneDamage()
             end
         end)
     end, 1000 )
@@ -73,12 +73,20 @@ function zoneManager.next()
     end)
 end
 
-function zoneManager.playerZoneDommage (player) 
-    zoneManager.hasZoneDamage = true
-    if (zoneManager.hasZoneDamage) then
-        pprint.info( GetPlayerName(player)..' not in zone!' )
-        AddPlayerChat( player, 'You are not in the zone!' )
+function zoneManager.playerZoneDamage (player) 
+    pprint.info( GetPlayerName(player)..' not in zone!' )
+    AddPlayerChat( player, 'You are not in the zone!' )
+
+    local playerArmor = GetPlayerArmor(player) - BR.Config.DAMAGE_PER_SECOND
+    local playerHealth = GetPlayerHealth(player) + playerArmor
+
+    if (playerArmor < 0) then
+        playerHealth = playerHealth + playerArmor
+        playerArmor = 0
     end
+
+    SetPlayerArmor(player, playerArmor)
+    SetPlayerHealth(player, playerHealth)
 end
 
 function zoneManager.start()

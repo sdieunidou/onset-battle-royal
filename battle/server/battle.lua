@@ -20,6 +20,57 @@ battleManager.SpawnManager.init()
 
 battleManager.ZoneManager = zoneManager
 
+function battleManager.init()
+    AddEvent("OnPlayerDeath", battleManager.OnPlayerDeath)
+    AddEvent("OnPlayerQuit", battleManager.OnPlayerQuit)
+
+    battleManager.timer = CreateTimer(function()
+        if battleManager.state ~= STATE_WAITING then return end
+
+		if GetPlayerCount() < BR.Config.MIN_PLAYERS then
+			return
+        end
+
+        battleManager.start()
+	end, BR.Config.TIMER_CHECK_PLAYERS * 1000)
+
+    battleManager.reset()
+    battleManager.ZoneManager.init()
+end
+
+function battleManager.getState()
+    return battleManager.state
+end
+
+function battleManager.OnPlayerDeath( player, instigator )
+    battleManager.playerKilled ( player, instigator )
+end
+
+function battleManager.OnPlayerQuit( player, instigator )
+    battleManager.playerKilled ( player, instigator )
+end
+
+function battleManager.stop()
+    if ( not (battleManager.state == STATE_ACTIVE) ) then
+        AddPlayerChatAll( 'Stopping current BattleRoyal...' )
+        pprint.info( 'Stopping current BattleRoyal...' )
+    end
+
+    battleManager.reset()
+end
+
+function battleManager.reset()
+    battleManager.state = STATE_WAITING
+    UnpauseTimer(battleManager.timer)
+    
+    utilPlayer.doForAllPlayers(function(player)
+        battleManager.SpawnManager.setPlayerDimensionSpawn( player )
+    end)
+    
+    AddPlayerChatAll( 'Wait until the next game ;)' )
+    pprint.info( 'Waiting for the next BattleRoyal.' )
+end
+
 function battleManager.start()
     pprint.info( ( 
             'Starting New BatteRoyal in 10 seconds! Rules: %d minutes - %d zones - %ds by zones - %d max players - %d zone radius - %d zone reduce radius'
@@ -60,25 +111,7 @@ function battleManager.start()
         utilPlayer.doForAllPlayers(function(player)
             if (i > BR.Config.MAX_NUMBER_PLAYERS_BY_BATTLE) then return end
 
-            battleManager.players[player] = { }
-            battleManager.players[player].kills = 0
-            battleManager.players[player].position = 0
-            
-            local randomX = RandomFloat(cx + BR.Config.ZONE_REDUCE_RADIUS, cx - BR.Config.ZONE_REDUCE_RADIUS)
-            local randomY = RandomFloat(cy + BR.Config.ZONE_REDUCE_RADIUS, cy - BR.Config.ZONE_REDUCE_RADIUS)
-            SetPlayerLocation(player, randomX, randomY, 10000.000000)
-            SetPlayerDimension(player, BR.Config.DIMENSION_BATTLE)
-
-            SetPlayerHealth(player, 100)
-            SetPlayerArmor(player, 100)
-
-            SetPlayerWeapon(player, 13, 90, true, 1, true)
-            SetPlayerWeapon(player, 7, 30, true, 2, true)
-            SetPlayerWeapon(player, 1, 50, true, 3, true)
-            
-            Delay(1000, function()
-                AttachPlayerParachute(player, true)
-            end)
+            battleManager.spawnPlayer(player)
 
             i = i + 1
         end)
@@ -88,29 +121,26 @@ function battleManager.start()
 	end)
 end
 
-function battleManager.stop()
-    if ( not (battleManager.state == STATE_ACTIVE) ) then
-        AddPlayerChatAll( 'Stopping current BattleRoyal...' )
-        pprint.info( 'Stopping current BattleRoyal...' )
-    end
-
-    battleManager.reset()
-end
-
-function battleManager.reset()
-    battleManager.state = STATE_WAITING
-    UnpauseTimer(battleManager.timer)
+function zoneManager.spawnPlayer (player)
+    battleManager.players[player] = { }
+    battleManager.players[player].kills = 0
+    battleManager.players[player].position = 0
     
-    utilPlayer.doForAllPlayers(function(player)
-        battleManager.SpawnManager.setPlayerDimensionSpawn( player )
+    local randomX = RandomFloat(cx + BR.Config.ZONE_REDUCE_RADIUS, cx - BR.Config.ZONE_REDUCE_RADIUS)
+    local randomY = RandomFloat(cy + BR.Config.ZONE_REDUCE_RADIUS, cy - BR.Config.ZONE_REDUCE_RADIUS)
+    SetPlayerLocation(player, randomX, randomY, 10000.000000)
+    SetPlayerDimension(player, BR.Config.DIMENSION_BATTLE)
+
+    SetPlayerHealth(player, 100)
+    SetPlayerArmor(player, 100)
+
+    SetPlayerWeapon(player, 13, 90, true, 1, true)
+    SetPlayerWeapon(player, 7, 30, true, 2, true)
+    SetPlayerWeapon(player, 1, 50, true, 3, true)
+    
+    Delay(1000, function()
+        AttachPlayerParachute(player, true)
     end)
-    
-    AddPlayerChatAll( 'Wait until the next game ;)' )
-    pprint.info( 'Waiting for the next BattleRoyal.' )
-end
-
-function battleManager.getState()
-    return battleManager.state
 end
 
 function battleManager.SetGameEnd( player )
@@ -120,7 +150,7 @@ function battleManager.SetGameEnd( player )
     pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].." kills" )
 end
 
-function battleManager.playerEnd ( player, instigator )
+function battleManager.playerKilled ( player, instigator )
     if battleManager.state == STATE_ACTIVE and battleManager.players[player] ~= nil then
         local playerPosition = #battleManager.players - battleManager.currentPosition
         battleManager.currentPosition = battleManager.currentPosition + 1
@@ -145,32 +175,6 @@ function battleManager.playerEnd ( player, instigator )
             battleManager.SetGameEnd( instigator )
         end
 	end
-end
-
-function battleManager.OnPlayerDeath( player, instigator )
-    battleManager.playerEnd ( player, instigator )
-end
-
-function battleManager.OnPlayerQuit( player, instigator )
-    battleManager.playerEnd ( player, instigator )
-end
-
-function battleManager.init()
-    AddEvent("OnPlayerDeath", battleManager.OnPlayerDeath)
-    AddEvent("OnPlayerQuit", battleManager.OnPlayerQuit)
-
-    battleManager.timer = CreateTimer(function()
-        if battleManager.state ~= STATE_WAITING then return end
-
-		if GetPlayerCount() < BR.Config.MIN_PLAYERS then
-			return
-        end
-
-        battleManager.start()
-	end, BR.Config.TIMER_CHECK_PLAYERS * 1000)
-
-    battleManager.reset()
-    battleManager.ZoneManager.init()
 end
 
 function battleManager.doForAllPlayersInBattle(func)
