@@ -12,12 +12,18 @@
         "spawn/server/spawn.lua",
         "zone/server/zone.lua",
         "battle/server/battle.lua",
-        "boot/server/server.lua"
+        "boot/server/server.lua",
+		    "scoreboard/scoreboard_s.lua"
     ],
     "client_scripts": [
-      
+		    "scoreboard/scoreboard_c.lua"
     ],
     "files": [
-      
+        "scoreboard/gui/scoreboard.html",
+        "scoreboard/gui/scoreboard.css",
+        "scoreboard/gui/scoreboard.js",
+        "scoreboard/gui/jquery.js",
+        "scoreboard/gui/xbbcode.js",
+        "scoreboard/gui/xbbcode.css"
     ]
 }

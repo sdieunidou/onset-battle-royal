@@ -83,7 +83,7 @@ function battleManager.start()
           BR.Config.ZONE_REDUCE_RADIUS
         ) 
     )
-    AddPlayerChatAll( '<span color="#3c763d" style="bold" size="16">Starting new BatteRoyal in 10 seconds!</>' )
+    AddPlayerChatAll( '<span color="#f4f142ff" style="bold" size="14">Starting new BatteRoyal in 10 seconds!</>' )
     PauseTimer(battleManager.timer)
     
     battleManager.state = STATE_ACTIVE
@@ -101,7 +101,7 @@ function battleManager.start()
             i = i + 1
         end)
 
-        AddPlayerChatAll( 'BatteRoyal is started!' )
+        AddPlayerChatAll( '<span color="#f4f142ff" style="bold" size="16">BatteRoyal is started!</>' )
         pprint.info( 'BatteRoyal is started!' )
 	end)
 end
@@ -136,8 +136,8 @@ function battleManager.SetGameEnd( player )
 
     if (player == nil) then return end
 
-    AddPlayerChatAll('<span color="#2db92f" style="bold" size="16">'..GetPlayerName(player)..' has win the battle with '..battleManager.players[player].kills..' kills</>')
     pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
+    AddPlayerChatAll('<span color="#f4f142ff" style="bold" size="20">'..GetPlayerName(player)..' has win the battle with '..battleManager.players[player].kills..' kills</>')
 end
 
 function battleManager.playerKilled ( player, instigator )
@@ -158,7 +158,7 @@ function battleManager.playerKilled ( player, instigator )
             end
         end
 
-        AddPlayerChatAll( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
+        AddPlayerChatAll(  '<span color="#ee0000ee" style="bold">'..GetPlayerName(player).."</> has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
         pprint.info( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
 
         if (playerPosition == 2 or #battleManager.players < 2) then

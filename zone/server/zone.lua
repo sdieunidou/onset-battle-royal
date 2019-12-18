@@ -50,7 +50,7 @@ function zoneManager.next()
     zoneManager.center = HC.circle(cx, cy, zoneManager.currentRadius)
     
     pprint.info( 'New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in. The next zone will be in '..BR.Config.TIME_BY_ZONE..' seconds! (current zone radius: '..zoneManager.currentRadius..' meters)' )
-    AddPlayerChatAll( '<span color="#ee0000ee" style="bold" size="16">New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in!</>' )
+    AddPlayerChatAll( '<span color="#f4f142ff" style="bold" size="16">New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in!</>' )
 
     BR.BattleManager.doForAllPlayersInBattle( function( player )
         local x, y, z = GetPlayerLocation( player )
@@ -61,7 +61,7 @@ function zoneManager.next()
         
             local meters = math.floor(tonumber(distance) / 100)
             if (meters > BR.Config.MAX_DISTANCE_PLAYERS_ANNOUNCE) then
-                pprint.info( GetPlayerName(player).." is at " .. math.floor(tonumber(distance) / 100) .. " meters from "..GetPlayerName(targetPlayer).."." )
+                pprint.info(  '<span color="#ee0000ee" style="bold">'..GetPlayerName(player).."</> is at " .. math.floor(tonumber(distance) / 100) .. " meters from "..GetPlayerName(targetPlayer).."." )
                 AddPlayerChatAll( GetPlayerName(player).." is at " .. math.floor(tonumber(distance) / 100) .. " meters from you." )
             end
         end)
