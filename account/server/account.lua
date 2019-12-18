@@ -28,4 +28,5 @@ function CreatePlayerData( player )
     SetPlayerPropertyValue(player, "mute", 0, true)
     SetPlayerPropertyValue(player, "chat_cooldown", 0, true)
     SetPlayerPropertyValue(player, "cmd_cooldown", 0, true)
+    SetPlayerPropertyValue(player, "kills", 0, true)
 end

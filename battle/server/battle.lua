@@ -136,7 +136,12 @@ function battleManager.SetGameEnd( player )
     if (player == nil) then return end
 
     pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
+	AddPlayerChat(player, '<span style="bold" size="14">============================</>')
     AddPlayerChatAll('<span color="#f4f142ff" style="bold" size="20">'..GetPlayerName(player)..' has win the battle with '..battleManager.players[player].kills..' kills</>')
+    AddPlayerChat(player, '<span style="bold" size="14">============================</>')
+	AddPlayerChat(player, '<span color="#f4f142ff" style="bold" size="14">Wait for the next game</>.')
+    AddPlayerChat(player, '<span style="bold" size="14">============================</>')
+    
 end
 
 function battleManager.playerKilled ( player, instigator )

@@ -16,6 +16,6 @@ function RemovePlayers() {
 	$('.player').remove();
 }
 
-function AddPlayer(id, name, ping) {
-	$('#playertable').append('<tr class="player"><td>'+name+'</td><td>'+ping+'</td></tr>');
+function AddPlayer(id, name, ping, kills) {
+	$('#playertable').append('<tr class="player"><td>'+name+'</td><td>'+kills+'</td><td>'+ping+'</td></tr>');
 }

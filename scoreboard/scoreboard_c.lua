@@ -57,7 +57,7 @@ function OnGetScoreboardData(servername, count, maxplayers, players)
 	ExecuteWebJS(scoreboard, "RemovePlayers()")
 	--print("OnGetScoreboardData "..#players)
 	for k, v in ipairs(players) do
-		ExecuteWebJS(scoreboard, "AddPlayer("..k..", '"..v[1].."', '"..v[2].."')")
+		ExecuteWebJS(scoreboard, "AddPlayer("..k..", '"..v[1].."', '"..v[2].."', '"..v[3].."')")
 	end
 end
 AddRemoteEvent("OnGetScoreboardData", OnGetScoreboardData)

@@ -5,7 +5,8 @@ function UpdateScoreboardData(playerid)
 	for _, v in ipairs(GetAllPlayers()) do
 		PlayerTable[v] = {
 			GetPlayerName(v),
-			GetPlayerPing(v)
+			GetPlayerPing(v),
+			GetPlayerPropertyValue(v, "kills")
 		}
 	end
 	
