@@ -54,7 +54,8 @@ function battleManager.start()
         local i = 1;
 
         battleManager.ZoneManager.start()
-        local center = battleManager.ZoneManager.getCenter()
+
+        local cx, cy = battleManager.ZoneManager.getCenter():center()
 
         utilPlayer.doForAllPlayers(function(player)
             if (i > BR.Config.MAX_NUMBER_PLAYERS_BY_BATTLE) then return end
@@ -63,8 +64,8 @@ function battleManager.start()
             battleManager.players[player].kills = 0
             battleManager.players[player].position = 0
             
-            local randomX = RandomFloat(center.x + BR.Config.ZONE_REDUCE_RADIUS, center.x - BR.Config.ZONE_REDUCE_RADIUS)
-            local randomY = RandomFloat(center.y + BR.Config.ZONE_REDUCE_RADIUS, center.y - BR.Config.ZONE_REDUCE_RADIUS)
+            local randomX = RandomFloat(cx + BR.Config.ZONE_REDUCE_RADIUS, cx - BR.Config.ZONE_REDUCE_RADIUS)
+            local randomY = RandomFloat(cy + BR.Config.ZONE_REDUCE_RADIUS, cy - BR.Config.ZONE_REDUCE_RADIUS)
             SetPlayerLocation(player, randomX, randomY, 10000.000000)
             SetPlayerDimension(player, BR.Config.DIMENSION_BATTLE)
 

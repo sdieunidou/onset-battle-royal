@@ -5,7 +5,6 @@
         "vendor/pprint.lua",
         "utils/server/pprint.lua",
         "utils/server/player.lua",
-        "utils/server/animation.lua",
         "admin/server/admin.lua",
         "admin/server/teleport.lua",
         "account/server/account.lua",
