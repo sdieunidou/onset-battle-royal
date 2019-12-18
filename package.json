@@ -1,0 +1,24 @@
+{
+    "author": "mTxServ",
+    "version": "1.0",
+    "server_scripts": [
+        "vendor/pprint.lua",
+        "utils/server/pprint.lua",
+        "utils/server/player.lua",
+        "utils/server/animation.lua",
+        "admin/server/admin.lua",
+        "admin/server/teleport.lua",
+        "account/server/account.lua",
+        "chat/server/chat.lua",
+        "spawn/server/spawn.lua",
+        "zone/server/zone.lua",
+        "battle/server/battle.lua",
+        "boot/server.lua"
+    ],
+    "client_scripts": [
+      
+    ],
+    "files": [
+      
+    ]
+}
