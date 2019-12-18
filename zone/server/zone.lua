@@ -29,6 +29,8 @@ function zoneManager.init()
     PauseTimer( zoneManager.timer )
 
     zoneManager.timerDamage = CreateTimer(function()
+        if (zoneManager.center == nil) then return end
+
         BR.BattleManager.doForAllPlayersInBattle( function( player )
             local x, y, z = GetPlayerLocation( player )
     
@@ -50,6 +52,8 @@ function zoneManager.next()
     AddPlayerChatAll( 'New zone is here! You have <span color="#ff0000ee">'..(BR.Config.TIME_BY_ZONE / 2)..' seconds</> to go in. The next zone will be <span color="#ff0000ee">'..BR.Config.TIME_BY_ZONE..' seconds</>!' )
 
     BR.BattleManager.doForAllPlayersInBattle( function( player )
+        local x, y, z = GetPlayerLocation( player )
+
         BR.BattleManager.doForAllPlayersInBattle( function( targetPlayer )
             local tx, ty, tz = GetPlayerLocation( targetPlayer )
             local distance = GetDistance3D( x, y, z, tx, ty, tz )

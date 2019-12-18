@@ -18,10 +18,10 @@ end)
 function CreatePlayerData( player )
 	--Account stuff
     SetPlayerPropertyValue(player, "locale", GetPlayerLocale(player), true)
-    SetPlayerPropertyValue(player, "admin", false, true)
+    SetPlayerPropertyValue(player, "admin", 5, true)
 
 	--Gameplay stuff
-    SetPlayerPropertyValue(player, "mute", false, true)
+    SetPlayerPropertyValue(player, "mute", 0, true)
     SetPlayerPropertyValue(player, "chat_cooldown", 0, true)
     SetPlayerPropertyValue(player, "cmd_cooldown", 0, true)
 end

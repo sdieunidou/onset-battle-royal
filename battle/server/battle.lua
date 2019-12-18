@@ -16,11 +16,11 @@ battleManager.timer = nil
 battleManager.currentPosition = 0
 
 battleManager.SpawnManager = spawnManager
-battleManager.SpawnManager.init()
-
 battleManager.ZoneManager = zoneManager
 
 function battleManager.init()
+    battleManager.SpawnManager.init()
+    
     AddEvent("OnPlayerDeath", battleManager.OnPlayerDeath)
     AddEvent("OnPlayerQuit", battleManager.OnPlayerQuit)
 
@@ -106,13 +106,9 @@ function battleManager.start()
 
         battleManager.ZoneManager.start()
 
-        local cx, cy = battleManager.ZoneManager.getCenter():center()
-
         utilPlayer.doForAllPlayers(function(player)
             if (i > BR.Config.MAX_NUMBER_PLAYERS_BY_BATTLE) then return end
-
             battleManager.spawnPlayer(player)
-
             i = i + 1
         end)
 
@@ -121,7 +117,9 @@ function battleManager.start()
 	end)
 end
 
-function zoneManager.spawnPlayer (player)
+function battleManager.spawnPlayer (player)
+    local cx, cy = battleManager.ZoneManager.getCenter():center()
+
     battleManager.players[player] = { }
     battleManager.players[player].kills = 0
     battleManager.players[player].position = 0
@@ -146,8 +144,8 @@ end
 function battleManager.SetGameEnd( player )
     battleManager.stop()
 
-    AddPlayerChatAll( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].." kills" )
-    pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].." kills" )
+    AddPlayerChatAll( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
+    pprint.info( GetPlayerName(player).." has win the battle royal with "..battleManager.players[player].kills.." kills" )
 end
 
 function battleManager.playerKilled ( player, instigator )
@@ -166,14 +164,16 @@ function battleManager.playerKilled ( player, instigator )
             AddPlayerChat(instigator, GetPlayerName(instigator).." has killed "..GetPlayerName(player) )
         end
 
-        AddPlayerChatAll( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].." kills" )
-        pprint.info( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].." kills" )
+        pprint.info(playerPosition)
 
-        battleManager.players[player] = nil
-        
+        AddPlayerChatAll( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
+        pprint.info( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
+
         if (playerPosition == 2 or #battleManager.players < 2) then
             battleManager.SetGameEnd( instigator )
         end
+
+        battleManager.players[player] = nil
 	end
 end
 

@@ -1,4 +1,5 @@
-BR = BR or {}
+local package_name = GetPackageName()
+local pprint = require( ( 'packages/%s/utils/server/pprint' ):format( GetPackageName() ) )
 
 local spawnManager = {}
 
@@ -6,20 +7,19 @@ function spawnManager.setPlayerDimensionSpawn( player )
     SetPlayerDimension(player, BR.Config.DIMENSION_SPAWN)
     SetPlayerVoiceDimension(player, BR.Config.DIMENSION_SPAWN)
     
-    SetPlayerLocation( player, -167958.000000, 78089.000000, 1569.000000)
-    SetPlayerHeading( player, -90.0)
+    pprint.info(GetPlayerName(player).." setPlayerDimensionSpawn" )
 end
 
 function spawnManager.OnPlayerJoin( player )
     spawnManager.setPlayerDimensionSpawn( player )
+
+    SetPlayerLocation(player, 114900.375, -4946.166015625, 1292.6826171875)
+
+    pprint.info(GetPlayerName(player).." has spawn in lobby" )
 end
 
-function spawnManager.OnPlayerSpawn( player )
-    spawnManager.setPlayerDimensionSpawn( player )
-end
 function spawnManager.init()
     AddEvent("OnPlayerJoin", spawnManager.OnPlayerJoin)
-    AddEvent("OnPlayerSpawn", spawnManager.OnPlayerSpawn)
 end
 
 AddFunctionExport( 'init', spawnManager.init )

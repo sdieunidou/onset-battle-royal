@@ -12,6 +12,43 @@ You should have received a copy of the Onset Open Source License along with this
 see https://bluemountains.io/Onset_OpenSourceSoftware_License.txt
 ]]--
 
+local NiceColors = { 0xFF0000, 0xFF0066, 0xEF00FF, 0x8000FF, 0x1100FF, 0x004DFF, 0x00B3FF, 0x00FFD5, 0x00FF77, 0x00FF1A, 0x55FF00, 0xEFFF00, 0xFFBC00, 0xFFA200, 0x915425 }
+
+local rgb2hex = function (rgb)
+	local hexadecimal = '#'
+
+	for key = 1, #rgb do
+	    local value = rgb[key] 
+		local hex = ''
+
+		while (value > 0) do
+			local index = math.fmod(value, 16) + 1
+			value = math.floor(value / 16)
+			hex = string.sub('0123456789ABCDEF', index, index) .. hex			
+		end
+
+		if (string.len(hex) == 0) then
+			hex = '00'
+		elseif (string.len(hex) == 1) then
+			hex = '0' .. hex
+		end
+		hexadecimal = hexadecimal .. hex
+	end
+
+	return hexadecimal
+end
+
+function GetPlayerColorHEX(player)
+	local r, g, b = HexToRGBA( NiceColors[ math.random( #NiceColors ) ] )
+
+	rgba = {}
+	rgba[1] = r
+	rgba[2] = g
+	rgba[3] = b
+
+	return rgb2hex(rgba)
+end
+
 function OnPlayerChat(player, message)
 	if (GetPlayerPropertyValue(player, 'mute') ~= 0) then
 		if (not CheckForUnmute(player)) then
