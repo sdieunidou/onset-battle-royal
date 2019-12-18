@@ -6,7 +6,7 @@ Simple battle royal game mode for Onset.
 
 * Add zone effects
 * Add dommages
-* Minimap for center point?!
+* Compass for center point
 
 ## Sponsor
 
