@@ -6,7 +6,8 @@ Simple battle royal game mode for Onset.
 
 * Add zone effects
 * Add dommages
-* Compass for center point
+* Compass (center point)
+* Client GUI
 
 ## Sponsor
 
