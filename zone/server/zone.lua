@@ -85,6 +85,10 @@ function zoneManager.playerZoneDamage (player)
         playerArmor = 0
     end
 
+    if (playerHealth < 0) then
+        playerHealth = 0
+    end
+
     SetPlayerArmor(player, playerArmor)
     SetPlayerHealth(player, playerHealth)
 end
