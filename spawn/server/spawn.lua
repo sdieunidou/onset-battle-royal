@@ -3,8 +3,6 @@ BR = BR or {}
 local spawnManager = {}
 
 function spawnManager.setPlayerDimensionSpawn( player )
-    SetPlayerRandomColor( player )
-    
     SetPlayerDimension(player, BR.Config.DIMENSION_SPAWN)
     SetPlayerVoiceDimension(player, BR.Config.DIMENSION_SPAWN)
     
