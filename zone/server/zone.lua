@@ -7,6 +7,7 @@ zoneManager.currentRadius = nil
 zoneManager.timer = nil
 zoneManager.reduceRadius = nil
 zoneManager.center = {}
+zoneManager.object = nil
 
 function zoneManager.init()
     zoneManager.timer = CreateTimer(function()
@@ -36,18 +37,16 @@ function zoneManager.next()
     BR.BattleManager.doForAllPlayersInBattle( function( player )
         local x, y, z = GetPlayerLocation( player )
 
-        local distance = GetDistance3D(
-            zoneManager.center.x, 
-            zoneManager.center.y, 
-            zoneManager.center.z, 
-            x, y, z
-        )
-    
-        local meters = math.floor(tonumber(distance) / 100)
-        if (meters > 500) then
-            pprint.info( GetPlayerName(player).." is at " .. math.floor(tonumber(distance) / 100) .. " meters from the center." )
-            AddPlayerChatAll( GetPlayerName(player).." is at " .. math.floor(tonumber(distance) / 100) .. " meters from the center." )
-        end
+        BR.BattleManager.doForAllPlayersInBattle( function( targetPlayer )
+            local tx, ty, tz = GetPlayerLocation( targetPlayer )
+            local distance = GetDistance3D( x, y, z, tx, ty, tz )
+        
+            local meters = math.floor(tonumber(distance) / 100)
+            if (meters > BR.Config.MAX_DISTANCE_PLAYERS_ANNOUNCE) then
+                pprint.info( GetPlayerName(player).." is at " .. math.floor(tonumber(distance) / 100) .. " meters from "..GetPlayerName(targetPlayer).."." )
+                AddPlayerChatAll( GetPlayerName(player).." is at " .. math.floor(tonumber(distance) / 100) .. " meters from you." )
+            end
+        end)
     end)
 end
 
@@ -58,6 +57,11 @@ function zoneManager.start()
     zoneManager.center.x = RandomFloat(183818, -217367)
     zoneManager.center.y = RandomFloat(183818, -217367)
     zoneManager.center.z = RandomFloat(0, 2000)
+
+
+	local x, y, z = 64151.0234375, 48423.33984375, 4516.530273
+
+    zoneManager.object = CreateObject(2, zoneManager.center.x, zoneManager.center.y, 0, 180, 0, 10000, 10000, 10000)
     
     UnpauseTimer( zoneManager.timer )
 end
