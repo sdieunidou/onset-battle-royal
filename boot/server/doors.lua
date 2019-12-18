@@ -700,6 +700,11 @@ AddEvent("OnPackageStart", function()
 	CreateDoor(13, -173697.000000, 82609.000000, 1880.000000, 0.0, true)
 	CreateDoor(13, -173697.000000, 81909.000000, 1880.000000, 0.0, true)
 	-- END PRISON D-BLOCK CELL DOORS
-	
+
+	for k, v in pairs(GetAllDoors()) do
+		SetDoorDimension(v, BR.Config.DIMENSION_BATTLE)
+		SetDoorOpen(v, false)
+	end
+
 	print("Door Count: "..#GetAllDoors())
 end)

@@ -105,7 +105,7 @@ function zoneManager.start()
     
     zoneManager.center = HC.circle(randomFloat(-19000, 183818), randomFloat(-19000, 183818), BR.Config.ZONE_RADIUS)
 
-    pprint.info(zoneManager.center:center())
+    pprint.info('Center point is ' .. zoneManager.center:center())
 
     UnpauseTimer( zoneManager.timer )
     PauseTimer(zoneManager.timerDamage)

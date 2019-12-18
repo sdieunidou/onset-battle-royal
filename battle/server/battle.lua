@@ -95,6 +95,10 @@ function battleManager.start()
 
         battleManager.ZoneManager.start()
 
+        for k, v in pairs(GetAllDoors()) do
+            SetDoorOpen(v, false)
+        end
+
         utilPlayer.doForAllPlayers(function(player)
             if (i > BR.Config.MAX_NUMBER_PLAYERS_BY_BATTLE) then return end
             battleManager.spawnPlayer(player)

@@ -11,7 +11,7 @@ BR.Config.DIMENSION_BATTLE = 100
 BR.Config.MAX_TIME = 5 * 60
 BR.Config.TIME_BY_ZONE = 60
 BR.Config.ROUNDS = BR.Config.MAX_TIME / BR.Config.TIME_BY_ZONE
-BR.Config.MIN_PLAYERS = 1
+BR.Config.MIN_PLAYERS = 2
 BR.Config.TIMER_CHECK_PLAYERS = 5
 BR.Config.MAX_NUMBER_PLAYERS_BY_BATTLE = GetMaxPlayers()
 BR.Config.ZONE_RADIUS = 5000
@@ -25,5 +25,10 @@ BR.BattleManager = battleManager
 
 AddEvent( "OnPackageStart" , function()
     pprint.info( "Loading BattleRoyal\n" )
+
+    CreateObject(2, 206432.25, 193076.046875, 1196.6668701172)
+    CreateObject(14, 206432.25, 193058.84375, 1301.1348876953)
+    CreateText3D("AK-47", 17, 206432.25, 193076.046875, 1196.6668701172 + 60, 0,0,0)
+
     BR.BattleManager.init()
 end)
