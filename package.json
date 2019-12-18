@@ -12,7 +12,7 @@
         "spawn/server/spawn.lua",
         "zone/server/zone.lua",
         "battle/server/battle.lua",
-        "boot/server.lua"
+        "boot/server/server.lua"
     ],
     "client_scripts": [
       
