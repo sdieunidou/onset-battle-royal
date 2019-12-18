@@ -124,7 +124,6 @@ function battleManager.spawnPlayer (player)
 
     SetPlayerWeapon(player, 13, 90, true, 1, true)
     SetPlayerWeapon(player, 7, 30, true, 2, true)
-    SetPlayerWeapon(player, 1, 50, true, 3, true)
     
     Delay(1000, function()
         AttachPlayerParachute(player, true)
@@ -149,7 +148,7 @@ function battleManager.playerKilled ( player, instigator )
 
         -- If it's not suicide
         if (player ~= instigator) then
-            battleManager.players[player].kills = battleManager.players[player].kills + 1
+            battleManager.players[instigator].kills = battleManager.players[player].kills + 1
             battleManager.players[player].position = playerPosition
 
             if (instigator ~= nil) then

@@ -6,7 +6,7 @@ function OnPlayerSteamAuth(player)
 
 	CreatePlayerData(player)
 
-	AddPlayerChatAll('<span color="#f4f142ff">'..GetPlayerName(player)..'</> ('..GetPlayerPropertyValue(player, "locale")..') joined the server')
+	AddPlayerChatAll('<span color="#f4f142ff">'..GetPlayerName(player)..' ('..GetPlayerPropertyValue(player, "locale")..')</> joined the server')
 end
 AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
 
