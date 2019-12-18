@@ -69,7 +69,7 @@ end
 function zoneManager.start()
     zoneManager.center = nil
     zoneManager.currentRound = 1
-    zoneManager.currentRadius = BR.Config.ZONE_RADIUS
+    zoneManager.currentRadius = BR.Config.ZONE_RADIUS + BR.Config.ZONE_REDUCE_RADIUS
     
     zoneManager.center = HC.circle(RandomFloat(183818, -217367), RandomFloat(183818, -217367), BR.Config.ZONE_RADIUS)
 
