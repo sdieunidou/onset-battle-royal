@@ -2,6 +2,10 @@
 
 Simple battle royal game mode for Onset.
 
+## Configuration
+
+Configuration is done in `boot/server/server.lua`.
+
 ## Example
 
 ```
@@ -19,9 +23,11 @@ Simple battle royal game mode for Onset.
 [INFO] New zone is here! You have 15.0 seconds to go in. The next zone will be in 30 seconds! (current zone radius: 1000.0 meters)
 [INFO] Start zone damage for 15.0 secondes
 [INFO] End zone damage
+
 [INFO] New zone is here! You have 15.0 seconds to go in. The next zone will be in 30 seconds! (current zone radius: 500.0 meters)
 [INFO] Start zone damage for 15.0 secondes
 [INFO] End zone damage
+
 [INFO] Final zone!!! (radius: 10 meters)
 ```
 
