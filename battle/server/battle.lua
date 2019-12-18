@@ -67,8 +67,13 @@ function battleManager.start()
             local randomY = RandomFloat(center.y + BR.Config.ZONE_REDUCE_RADIUS, center.y - BR.Config.ZONE_REDUCE_RADIUS)
             SetPlayerLocation(player, randomX, randomY, 10000.000000)
             SetPlayerDimension(player, BR.Config.DIMENSION_BATTLE)
+
             SetPlayerHealth(player, 100)
             SetPlayerArmor(player, 100)
+
+            SetPlayerWeapon(player, 13, 90, true, 1, true)
+            SetPlayerWeapon(player, 7, 30, true, 2, true)
+            SetPlayerWeapon(player, 1, 50, true, 3, true)
             
             Delay(1000, function()
                 AttachPlayerParachute(player, true)
