@@ -12,10 +12,7 @@ end
 
 function spawnManager.OnPlayerJoin( player )
     spawnManager.setPlayerDimensionSpawn( player )
-
-    SetPlayerLocation(player, 114900.375, -4946.166015625, 1292.6826171875)
-
-    pprint.info(GetPlayerName(player).." has spawn in lobby" )
+	SetPlayerSpawnLocation(player, 207078.484375, 192689.109375, 1306.94921875, 175.41589355469 )
 end
 
 function spawnManager.init()
