@@ -69,7 +69,7 @@ function OnPlayerChat(player, message)
 
 	message = message:gsub("<span.->(.-)</>", "%1") -- removes chat span tag
 
-	local fullchatmessage = '<span color="'..GetPlayerColorHEX(player)..'">'..GetPlayerName(player)..'('..player..'):</> '..message
+	local fullchatmessage = '<span color="'..GetPlayerColorHEX(player)..'">'..GetPlayerName(player)..'('..GetPlayerLocale(player)..'):</> '..message
 	AddPlayerChatAll(fullchatmessage)
 end
 AddEvent("OnPlayerChat", OnPlayerChat)
