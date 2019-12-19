@@ -35,7 +35,6 @@
     "hud/client/minimap/OnsetMap.png",
     "hud/client/speaking/hud.html",
     "hud/client/speaking/speaking.png",
-    "hud/client/rank/hud.html",
-    "hud/client/kills/hud.html"
+    "hud/client/rank/hud.html"
   ]
 }

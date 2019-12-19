@@ -157,6 +157,10 @@ AddCommand("getpos", function(player)
     AddPlayerChat(player, "X : "..x.." Y : "..y.." Z : "..z)
 end)
 
+AddCommand("help", function(player)
+    AddPlayerChat(player, "BattleRoyal (author: mTxServ.com)")
+end)
+
 AddCommand("br_stop", function(player)
 	if (GetPlayerPropertyValue(player, 'admin') < 2) then
 		return AddPlayerChat(player, "Insufficient permission")

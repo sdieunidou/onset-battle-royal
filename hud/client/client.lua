@@ -3,7 +3,6 @@
 local minimap
 local speakingHud
 local rankHud
-local killsHud
 
 AddEvent("OnPackageStart", function ()
     minimap = CreateWebUI(0, 0, 0, 0, 0, 32)
@@ -20,21 +19,16 @@ AddEvent("OnPackageStart", function ()
 
     rankHud = CreateWebUI(0, 0, 0, 0, 0, 28)
     LoadWebFile( rankHud, "http://asset/"..GetPackageName().."/hud/client/rank/hud.html" )
-    SetWebAlignment( killsHud, 0, 0 )
-    SetWebAnchors( killsHud, 0, 0, 1, 1 )
-   -SetWebVisibility( rankHud, WEB_HITINVISIBLE )
-
-    killsHud = CreateWebUI(0, 0, 0, 0, 0, 28)
-    LoadWebFile( killsHud, "http://asset/"..GetPackageName().."/hud/client/kilss/hud.html" )
-    SetWebAlignment( killsHud, 0, 0 )
-    SetWebAnchors( killsHud, 0, 0, 1, 1 )
-    SetWebVisibility( killsHud, WEB_HITINVISIBLE )
+    SetWebAlignment( rankHud, 0, 0 )
+    SetWebAnchors( rankHud, 0, 0, 1, 1 )
+    SetWebVisibility( rankHud, WEB_HITINVISIBLE )
 end)
 
-AddRemoteEvent("updateHud", function (rank, kills)
+function updateHud(rank)
+print(rank)
     ExecuteWebJS(rankHud, "SetRank("..rank..");")
-    ExecuteWebJS(killsHud, "SetKills("..kills..");")
-end)
+end
+AddRemoteEvent("updateHud", updateHud)
 
 AddEvent( "OnGameTick", function()
     --Speaking icon check
@@ -42,7 +36,7 @@ AddEvent( "OnGameTick", function()
     if IsPlayerTalking(player) then
         SetWebVisibility(speakingHud, WEB_HITINVISIBLE)
     else
-        --SetWebVisibility(speakingHud, WEB_HIDDEN)
+        SetWebVisibility(speakingHud, WEB_HIDDEN)
     end
 
     --Minimap refresh
@@ -64,5 +58,5 @@ AddRemoteEvent("SetHUDMarker", function (name, h, r, g, b)
 end)
 
 AddRemoteEvent("BattleNewZone", function(x, y, z, radius)
-    AddPlayerChat("testttt")
+-- todo
 end)
