@@ -6,7 +6,7 @@ function OnPackageStart()
 	--ZOrder = 5 and FrameRate = 10
 	--scoreboard = CreateWebUI(width / 4.7, height / 4.7, width / 1.3, height / 1.3, 5, 10)
 	scoreboard = CreateWebUI(450.0, 200.0, 700.0, 450.0, 5, 10)
-	LoadWebFile(scoreboard, "http://asset/battleroyal/scoreboard/gui/scoreboard.html")
+	LoadWebFile(scoreboard, "http://asset/"..GetPackageName().."/scoreboard/gui/scoreboard.html")
 	SetWebAlignment(scoreboard, 0.0, 0.0)
 	SetWebAnchors(scoreboard, 0.0, 0.0, 1.0, 1.0)
 	SetWebVisibility(scoreboard, WEB_HIDDEN)
