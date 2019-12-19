@@ -32,11 +32,11 @@
     "scoreboard/gui/jquery.js",
     "scoreboard/gui/xbbcode.js",
     "scoreboard/gui/xbbcode.css",
-    "hud/minimap/minimap.css",
-    "hud/minimap/minimap.html",
-    "hud/minimap/minimap.js",
-    "hud/minimap/OnsetMap.png",
-    "hud/speaking/hud.html",
-    "hud/speaking/speaking.png"
+    "hud/client/minimap/minimap.css",
+    "hud/client/minimap/minimap.html",
+    "hud/client/minimap/minimap.js",
+    "hud/client/minimap/OnsetMap.png",
+    "hud/client/speaking/hud.html",
+    "hud/client/speaking/speaking.png"
   ]
 }
