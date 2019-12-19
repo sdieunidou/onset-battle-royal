@@ -9,8 +9,6 @@ function OnPackageStart()
     SetWebAnchors(minimap, 0, 0, 1, 1)
     SetWebAlignment(minimap, 0, 0)
     SetWebURL(minimap, "http://asset/battleroyal/hud/minimap/minimap.html")
-    
-	ShowHealthHUD(false)
     ShowWeaponHUD(true)
 end
 AddEvent("OnPackageStart", OnPackageStart)
