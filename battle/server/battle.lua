@@ -61,7 +61,8 @@ function battleManager.stop()
         AddPlayerChatAll( 'Stopping current BattleRoyal...' )
         pprint.info( 'Stopping current BattleRoyal...' )
     end
-
+    
+    battleManager.ZoneManager.stop()
     battleManager.reset()
 end
 
