@@ -112,6 +112,10 @@ function battleManager.start()
             i = i + 1
         end)
 
+        battleManager.doForAllPlayersInBattle(function(player)
+            SetPlayerPropertyValue(player, "position", #battleManager.players, true)
+        end)
+
         AddPlayerChatAll( '<span color="#f4f142ff" style="bold" size="16">BatteRoyal is started!</>' )
         pprint.info( 'BatteRoyal is started!' )
 	end)
@@ -137,6 +141,9 @@ function battleManager.spawnPlayer (player)
     SetPlayerWeapon(player, 7, 30, true, 2, true)
     
     spawnManager.randomPlayerClothes(player, player)
+    SetPlayerPropertyValue(player, "position", 0, true)
+    
+    CallRemoteEvent(player, "updateHud", rank)
     
     Delay(1000, function()
         AttachPlayerParachute(player, true)
@@ -163,14 +170,14 @@ function battleManager.playerKilled ( player, instigator )
         battleManager.currentPosition = battleManager.currentPosition + 1
 
         battleManager.SpawnManager.setPlayerDimensionSpawn( player )
+        
+        battleManager.players[player].position = playerPosition
+        SetPlayerPropertyValue(player, "position", battleManager.players[player].position, true)
 
         -- If it's not suicide
         if (instigator ~= nil and player ~= instigator) then
             battleManager.players[instigator].kills = battleManager.players[player].kills + 1
-            battleManager.players[player].position = playerPosition
-
 	        SetPlayerPropertyValue(instigator, "kills", battleManager.players[instigator].kills, true)
-	        SetPlayerPropertyValue(player, "position", battleManager.players[player].position, true)
 
             if (instigator ~= nil) then
                 AddPlayerChat(player, '<span color="#ee0000ee" style="bold" size="16">'..GetPlayerName(instigator).." has killed "..GetPlayerName(player)..'</>')

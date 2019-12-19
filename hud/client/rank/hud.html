@@ -16,7 +16,24 @@
 </div>
 
 <script>
+    let latestRank
+    
+    $('#rank-count').hide()
+
     function SetRank(rank) {
+        if (latestRank == rank) {
+            return
+        }
+
+        latestRank = rank
+        
+        $('#rank-count').hide(200)
+
+        if (rank <= 0) {
+            return
+        }
+
         $('#rank-count').text(rank)
+        $('#rank-count').show(200)
     }
 </script>
