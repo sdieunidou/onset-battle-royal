@@ -3,6 +3,7 @@ local utilPlayer  = require( ( 'packages/%s/utils/server/player' ):format( packa
 local spawnManager  = require( ( 'packages/%s/spawn/server/spawn' ):format( package_name ) )
 local zoneManager  = require( ( 'packages/%s/zone/server/zone' ):format( package_name ) )
 local pprint = require( ( 'packages/%s/utils/server/pprint' ):format( package_name ) )
+local random  = require( ( 'packages/%s/utils/server/random' ):format( package_name ) )
 
 local battleManager = {}
 
@@ -117,8 +118,8 @@ function battleManager.spawnPlayer (player)
     battleManager.players[player].kills = 0
     battleManager.players[player].position = 0
     
-    local randomX = randomFloat(cx + BR.Config.ZONE_REDUCE_RADIUS, cx - BR.Config.ZONE_REDUCE_RADIUS)
-    local randomY = randomFloat(cy + BR.Config.ZONE_REDUCE_RADIUS, cy - BR.Config.ZONE_REDUCE_RADIUS)
+    local randomX = random.randomFloat(cx + BR.Config.ZONE_REDUCE_RADIUS, cx - BR.Config.ZONE_REDUCE_RADIUS)
+    local randomY = random.randomFloat(cy + BR.Config.ZONE_REDUCE_RADIUS, cy - BR.Config.ZONE_REDUCE_RADIUS)
 
     SetPlayerLocation(player, randomX, randomY, 30000.000000)
     SetPlayerDimension(player, BR.Config.DIMENSION_BATTLE)
@@ -187,27 +188,6 @@ function battleManager.doForAllPlayersInBattle(func)
 	for k,v in ipairs(battleManager.players) do
 		func(k)
 	end
-end
-
-function randomFloat(min, max, precision)
-	-- Generate a random floating point number between min and max
-	--[[1]] local range = max - min
-	--[[2]] local offset = range * math.random()
-	--[[3]] local unrounded = min + offset
-
-	-- Return unrounded number if precision isn't given
-	if not precision then
-		return unrounded
-	end
-
-	-- Round number to precision and return
-	--[[1]] local powerOfTen = 10 ^ precision
-	local n
-	--[[2]] n = unrounded * powerOfTen
-	--[[3]] n = n + 0.5
-	--[[4]] n = math.floor(n)
-	--[[5]] n = n / powerOfTen
-	return n
 end
 
 AddFunctionExport( 'init', battleManager.init )

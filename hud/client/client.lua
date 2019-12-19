@@ -1,7 +1,7 @@
 -- https://github.com/frederic2ec/onsetrp
 
-local _ = function(k,...) return ImportPackage("i18n").t(GetPackageName(),k,...) end
 local minimap
+local SpeakingHud
 
 function OnPackageStart()
     ShowWeaponHUD(true)

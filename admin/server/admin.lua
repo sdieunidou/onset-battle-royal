@@ -147,3 +147,39 @@ function cmd_clear(player)
 	end
 end
 AddCommand("clear", cmd_clear)
+
+AddCommand("getpos", function(player)
+	if (GetPlayerPropertyValue(player, 'admin') < 2) then
+		return AddPlayerChat(player, "Insufficient permission")
+	end
+
+    local x, y, z = GetPlayerLocation(player)
+    AddPlayerChat(player, "X : "..x.." Y : "..y.." Z : "..z)
+end)
+
+AddCommand("br_stop", function(player)
+	if (GetPlayerPropertyValue(player, 'admin') < 2) then
+		return AddPlayerChat(player, "Insufficient permission")
+	end
+
+	BR.BattleManager.stop()
+    AddPlayerChat(player, "Battle stop")
+end)
+
+AddCommand("br_start", function(player)
+	if (GetPlayerPropertyValue(player, 'admin') < 2) then
+		return AddPlayerChat(player, "Insufficient permission")
+	end
+	
+	BR.BattleManager.start()
+    AddPlayerChat(player, "Battle start")
+end)
+
+AddCommand("br_reset", function(player)
+	if (GetPlayerPropertyValue(player, 'admin') < 2) then
+		return AddPlayerChat(player, "Insufficient permission")
+	end
+	
+	BR.BattleManager.reset()
+    AddPlayerChat(player, "Battle reset")
+end)

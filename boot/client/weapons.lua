@@ -5,6 +5,8 @@ Addtional configuration on the server is necessary.
 
 ]]--
 
+local random  = require( ( 'packages/%s/utils/server/random' ):format( package_name ) )
+
 AddEvent("OnPackageStart", function()
 
 	local Weapon = GetWeaponIdentifier():NewWeapon(1)
@@ -1108,7 +1110,7 @@ HitDecals["Metal"] = "/Game/Weapons/Decals/Materials/M_MetalDecals"
 function OnPlayWeaponHitEffects(PlayerId, Weapon, HitType, HitId, StartLocation, HitLocation, HitLocationRelative, HitNormal, HitResult)
 
 	HitNormal = HitNormal:ToOrientationRotator()
-	HitNormal.Roll = RandomFloat(-180.0, 180.0)
+	HitNormal.Roll = random.randomFloat(-180.0, 180.0)
 	
 	if HitType == HIT_AIR then
 	
