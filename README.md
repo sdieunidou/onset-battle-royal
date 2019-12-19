@@ -2,6 +2,10 @@
 
 Simple battle royal game mode for Onset. Currently in development. Feel free to contribute!
 
+## Credits
+
+* minimap from the excellent https://github.com/frederic2ec/onsetrp
+
 ## Configuration
 
 Configuration is done in `boot/server/server.lua`.

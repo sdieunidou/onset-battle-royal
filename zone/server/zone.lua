@@ -51,9 +51,11 @@ function zoneManager.next()
     
     pprint.info( 'New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in. The next zone will be in '..BR.Config.TIME_BY_ZONE..' seconds! (current zone radius: '..zoneManager.currentRadius..' meters)' )
     AddPlayerChatAll( '<span color="#f4f142ff" style="bold" size="16">New zone is here! You have '..(BR.Config.TIME_BY_ZONE / 2)..' seconds to go in!</>' )
-
+    
     BR.BattleManager.doForAllPlayersInBattle( function( player )
         local x, y, z = GetPlayerLocation( player )
+        CallRemoteEvent(player, "BattleNewZone", cx, cy, z, zoneManager.currentRadius )
+
 
         BR.BattleManager.doForAllPlayersInBattle( function( targetPlayer )
             local tx, ty, tz = GetPlayerLocation( targetPlayer )
