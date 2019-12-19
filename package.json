@@ -9,7 +9,7 @@
         "admin/server/admin.lua",
         "admin/server/teleport.lua",
         "account/server/account.lua",
-        "hud/server.lua",
+        "hud/server/server.lua",
         "chat/server/chat.lua",
         "spawn/server/spawn.lua",
         "zone/server/zone.lua",
@@ -22,7 +22,7 @@
         "zone/client/zone.lua",
         "spawn/client/spawn.lua",
 		"scoreboard/client/scoreboard.lua",
-        "hud/client.lua"
+        "hud/client/client.lua"
     ],
     "files": [
         "scoreboard/gui/scoreboard.html",
@@ -34,6 +34,8 @@
         "hud/minimap/minimap.css",
         "hud/minimap/minimap.html",
         "hud/minimap/minimap.js",
-        "hud/minimap/OnsetMap.png"
+        "hud/minimap/OnsetMap.png",
+        "hud/speaking/hud.html",
+        "hud/speaking/speaking.png"
     ]
 }
