@@ -22,6 +22,11 @@ battleManager.ZoneManager = zoneManager
 function battleManager.init()
     battleManager.SpawnManager.init()
     
+	for k, v in pairs(GetAllDoors()) do
+		SetDoorDimension(v, BR.Config.DIMENSION_BATTLE)
+		SetDoorOpen(v, false)
+	end
+    
     AddEvent("OnPlayerDeath", battleManager.OnPlayerDeath)
     AddEvent("OnPlayerQuit", battleManager.OnPlayerQuit)
 
@@ -159,7 +164,7 @@ function battleManager.playerKilled ( player, instigator )
         battleManager.SpawnManager.setPlayerDimensionSpawn( player )
 
         -- If it's not suicide
-        if (player ~= instigator) then
+        if (instigator ~= nil and player ~= instigator) then
             battleManager.players[instigator].kills = battleManager.players[player].kills + 1
             battleManager.players[player].position = playerPosition
 
@@ -172,11 +177,11 @@ function battleManager.playerKilled ( player, instigator )
         AddPlayerChatAll(  '<span color="#ee0000ee" style="bold">'..GetPlayerName(player).."</> has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
         pprint.info( GetPlayerName(player).." has finished in position "..playerPosition.." with "..battleManager.players[player].kills.." kills" )
 
-        if (playerPosition == 2 or #battleManager.players < 2) then
+        if (playerPosition == 2 or #battleManager.players < 2 or not #battleManager.players) then
             battleManager.SetGameEnd( instigator )
         end
 
-        -- battleManager.players[player] = nil
+        battleManager.players[player] = nil
 	end
 end
 
