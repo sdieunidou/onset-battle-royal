@@ -1,9 +1,11 @@
 -- https://github.com/frederic2ec/onsetrp
 
-function getHudData(player)
-    CallRemoteEvent(player, "updateHud", hunger, thirst, cash, bank, healthlife, vehiclefuel)
-end
-AddRemoteEvent("getHudData", getHudData)
+AddRemoteEvent("getHudData", function (player)
+    local rank = GetPlayerPropertyValue(player, "position")
+    local kills = GetPlayerPropertyValue(player, "kills")
+
+    CallRemoteEvent(player, "updateHud", rank, kills)
+end)
 
 function SetHUDMarker(player, name, heading, r, g, b)
     CallRemoteEvent(player, "SetHUDMarker", name, heading, r, g, b)

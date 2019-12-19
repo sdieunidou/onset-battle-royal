@@ -62,7 +62,6 @@ function zoneManager.next()
         local x, y, z = GetPlayerLocation( player )
         CallRemoteEvent(player, "BattleNewZone", cx, cy, z, zoneManager.currentRadius )
 
-
         BR.BattleManager.doForAllPlayersInBattle( function( targetPlayer )
             local tx, ty, tz = GetPlayerLocation( targetPlayer )
             local distance = GetDistance3D( x, y, z, tx, ty, tz )

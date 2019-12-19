@@ -23,6 +23,8 @@ function CreatePlayerData( player )
 	--Account stuff
 	SetPlayerPropertyValue(player, "locale", GetPlayerLocale(player), true)
     SetPlayerPropertyValue(player, "admin", adminLevel, true)
+    SetPlayerPropertyValue(player, "kills", 0, true)
+    SetPlayerPropertyValue(player, "position", 0, true)
 	
 	--Gameplay stuff
     SetPlayerPropertyValue(player, "mute", 0, true)

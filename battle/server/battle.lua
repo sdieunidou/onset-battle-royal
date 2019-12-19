@@ -169,6 +169,9 @@ function battleManager.playerKilled ( player, instigator )
             battleManager.players[instigator].kills = battleManager.players[player].kills + 1
             battleManager.players[player].position = playerPosition
 
+	        SetPlayerPropertyValue(instigator, "kills", battleManager.players[instigator].kills, true)
+	        SetPlayerPropertyValue(player, "position", battleManager.players[player].position, true)
+
             if (instigator ~= nil) then
                 AddPlayerChat(player, '<span color="#ee0000ee" style="bold" size="16">'..GetPlayerName(instigator).." has killed "..GetPlayerName(player)..'</>')
                 AddPlayerChat(instigator, '<span color="#ee0000ee" style="bold" size="16">'..GetPlayerName(instigator).." has killed "..GetPlayerName(player)..'</>')

@@ -1,32 +1,48 @@
 -- https://github.com/frederic2ec/onsetrp
 
 local minimap
-local SpeakingHud
+local speakingHud
+local rankHud
+local killsHud
 
-function OnPackageStart()
-    ShowWeaponHUD(true)
-
+AddEvent("OnPackageStart", function ()
     minimap = CreateWebUI(0, 0, 0, 0, 0, 32)
     SetWebVisibility(minimap, WEB_HITINVISIBLE)
     SetWebAnchors(minimap, 0, 0, 1, 1)
     SetWebAlignment(minimap, 0, 0)
     SetWebURL(minimap, "http://asset/"..GetPackageName().."/hud/client/minimap/minimap.html")
 
-    SpeakingHud = CreateWebUI( 0, 0, 0, 0, 0, 42 )
-    LoadWebFile( SpeakingHud, "http://asset/"..GetPackageName().."/hud/client/speaking/hud.html" )
-    SetWebAlignment( SpeakingHud, 0, 0 )
-    SetWebAnchors( SpeakingHud, 0, 0, 1, 1 )
-    SetWebVisibility( SpeakingHud, WEB_HITINVISIBLE )
-end
-AddEvent("OnPackageStart", OnPackageStart)
+    speakingHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    LoadWebFile( speakingHud, "http://asset/"..GetPackageName().."/hud/client/speaking/hud.html" )
+    SetWebAlignment( speakingHud, 0, 0 )
+    SetWebAnchors( speakingHud, 0, 0, 1, 1 )
+    SetWebVisibility( speakingHud, WEB_HITINVISIBLE )
+
+    rankHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    LoadWebFile( rankHud, "http://asset/"..GetPackageName().."/hud/client/rank/hud.html" )
+    SetWebAlignment( killsHud, 0, 0 )
+    SetWebAnchors( killsHud, 0, 0, 1, 1 )
+   -SetWebVisibility( rankHud, WEB_HITINVISIBLE )
+
+    killsHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    LoadWebFile( killsHud, "http://asset/"..GetPackageName().."/hud/client/kilss/hud.html" )
+    SetWebAlignment( killsHud, 0, 0 )
+    SetWebAnchors( killsHud, 0, 0, 1, 1 )
+    SetWebVisibility( killsHud, WEB_HITINVISIBLE )
+end)
+
+AddRemoteEvent("updateHud", function (rank, kills)
+    ExecuteWebJS(rankHud, "SetRank("..rank..");")
+    ExecuteWebJS(killsHud, "SetKills("..kills..");")
+end)
 
 AddEvent( "OnGameTick", function()
     --Speaking icon check
     local player = GetPlayerId()
     if IsPlayerTalking(player) then
-        SetWebVisibility(SpeakingHud, WEB_HITINVISIBLE)
+        SetWebVisibility(speakingHud, WEB_HITINVISIBLE)
     else
-        SetWebVisibility(SpeakingHud, WEB_HIDDEN)
+        --SetWebVisibility(speakingHud, WEB_HIDDEN)
     end
 
     --Minimap refresh
@@ -34,13 +50,19 @@ AddEvent( "OnGameTick", function()
     local px,py,pz = GetPlayerLocation()
     ExecuteWebJS(minimap, "SetHUDHeading("..(360-y)..");")
     ExecuteWebJS(minimap, "SetMap("..px..","..py..","..y..");")
+
+    -- Hud refresh
+    CallRemoteEvent("getHudData")
 end )
 
-function SetHUDMarker(name, h, r, g, b)
+AddRemoteEvent("SetHUDMarker", function (name, h, r, g, b)
     if h == nil then
         ExecuteWebJS(minimap, "SetHUDMarker(\""..name.."\");");
     else
         ExecuteWebJS(minimap, "SetHUDMarker(\""..name.."\", "..h..", "..r..", "..g..", "..b..");");
     end
-end
-AddRemoteEvent("SetHUDMarker", SetHUDMarker)
+end)
+
+AddRemoteEvent("BattleNewZone", function(x, y, z, radius)
+    AddPlayerChat("testttt")
+end)

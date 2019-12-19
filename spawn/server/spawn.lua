@@ -60,6 +60,13 @@ function spawnManager.OnPlayerSpawn( player )
     SetPlayerWeapon(player, 7, 30, true, 2, true)
     
     spawnManager.randomPlayerClothes(player, player)
+
+    Delay(5000, function()
+    
+        local x, y, z = GetPlayerLocation( player )
+        CallRemoteEvent(player, "BattleNewZone", y, x, z, 100 )
+
+    end)
 end
 
 -- https://github.com/frederic2ec/onsetrp/blob/master/character/client.lua

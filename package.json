@@ -18,7 +18,6 @@
     "boot/server/server.lua"
   ],
   "client_scripts": [
-    "zone/client/zone.lua",
     "spawn/client/spawn.lua",
     "scoreboard/client/scoreboard.lua",
     "hud/client/client.lua"
@@ -35,6 +34,8 @@
     "hud/client/minimap/minimap.js",
     "hud/client/minimap/OnsetMap.png",
     "hud/client/speaking/hud.html",
-    "hud/client/speaking/speaking.png"
+    "hud/client/speaking/speaking.png",
+    "hud/client/rank/hud.html",
+    "hud/client/kills/hud.html"
   ]
 }
